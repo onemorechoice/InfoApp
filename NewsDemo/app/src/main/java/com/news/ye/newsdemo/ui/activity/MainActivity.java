@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
     }
 
     private void Test() {
-        
+
     }
 
     @Override
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i("onStart","onStart");
+        Log.i("onStart","onStart123");
     }
 
     @Override
