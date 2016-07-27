@@ -35,7 +35,7 @@ public class JianDanAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         JianDan.PostsEntity jianDan=mData.get(position);
         if (jianDan == null) {
             return;
@@ -47,6 +47,15 @@ public class JianDanAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
                 .error(R.drawable.error)
                 .placeholder(R.drawable.loading)
                 .into(((ItemViewHolder) holder).mNewsImg);
+
+        ((ItemViewHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(v, position);
+                }
+            }
+        });
     }
 
     @Override
@@ -54,6 +63,9 @@ public class JianDanAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
         return  mData.size();
     }
 
+    public JianDan.PostsEntity getItem(int position) {
+        return mData == null ? null : mData.get(position);
+    }
 
     public interface OnItemClickListener {
         public void onItemClick(View view, int position);
@@ -62,7 +74,7 @@ public class JianDanAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
     }
-    public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ItemViewHolder extends RecyclerView.ViewHolder  {
 
         public TextView mTitle;
         public TextView mDesc;
@@ -73,14 +85,14 @@ public class JianDanAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolde
             mTitle = (TextView) v.findViewById(R.id.tvTitle);
             mDesc = (TextView) v.findViewById(R.id.tvDesc);
             mNewsImg = (ImageView) v.findViewById(R.id.ivNews);
-            v.setOnClickListener(this);
+//            v.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            if(mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(view, this.getPosition());
-            }
-        }
+//        @Override
+//        public void onClick(View view) {
+//            if(mOnItemClickListener != null) {
+//                mOnItemClickListener.onItemClick(view, this.getPosition());
+//            }
+//        }
     }
 }

@@ -1,11 +1,11 @@
 package com.news.ye.newsdemo.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +16,9 @@ import com.news.ye.newsdemo.R;
 import com.news.ye.newsdemo.data.entity.JianDan;
 import com.news.ye.newsdemo.presenter.Impl.JianDanPresenterImpl;
 import com.news.ye.newsdemo.presenter.JianDanPresenter;
+import com.news.ye.newsdemo.ui.activity.WebActivity;
 import com.news.ye.newsdemo.ui.adapter.JianDanAdapter;
-import com.news.ye.newsdemo.ui.adapter.NewsAdapter;
 import com.news.ye.newsdemo.ui.iView.JianDanView;
-import com.news.ye.newsdemo.util.Const;
 import com.news.ye.newsdemo.util.Toasts;
 
 import java.util.ArrayList;
@@ -79,11 +78,20 @@ public class JianDanFragment extends Fragment implements JianDanView{
         });
         listData=new ArrayList<>();
         adapter=new JianDanAdapter(getActivity(),listData);
-//        adapter.setOnItemClickListener(mOnItemClickListener);
+        adapter.setOnItemClickListener(mOnItemClickListener);
         xList.setAdapter(adapter);
         xList.setRefreshing(true);
     }
-
+    JianDanAdapter.OnItemClickListener mOnItemClickListener=new JianDanAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(View view, int position) {
+                  JianDan.PostsEntity jianDan=adapter.getItem(position);
+                  Intent intent=new Intent(getActivity(), WebActivity.class);
+                  intent.putExtra("url",jianDan.getUrl());
+                  intent.putExtra("title",jianDan.getTitle());
+                  startActivity(intent);
+        }
+    };
 
     @Override
     public void onDestroyView() {
