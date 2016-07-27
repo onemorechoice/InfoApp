@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements MainView{
     private ActionBarDrawerToggle mDrawerToggle;
     private NavigationView mNavigationView;
     private MainPresenter mainPresenter;
+    //Test Git pull and push 2016/07/27 23:39
+
 
 
     @Override
@@ -31,8 +33,12 @@ public class MainActivity extends AppCompatActivity implements MainView{
         setContentView(R.layout.activity_main);
         initView();
         mainPresenter=new MainPresentImpl(this);
-        Log.i("onCreate","onCreate");
+        Test();
 
+    }
+
+    private void Test() {
+        
     }
 
     @Override
