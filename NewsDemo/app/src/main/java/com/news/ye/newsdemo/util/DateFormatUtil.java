@@ -10,7 +10,7 @@ public class DateFormatUtil {
     public static String formatDate(String createTime){
         String time = "unknown date";
         SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SS'Z'");
-        SimpleDateFormat outputFormat=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        SimpleDateFormat outputFormat=new SimpleDateFormat("yyyy/MM/dd");
         try{
             Date date=inputFormat.parse(createTime);
             time=outputFormat.format(date);

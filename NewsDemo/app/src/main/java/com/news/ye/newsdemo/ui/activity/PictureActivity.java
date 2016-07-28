@@ -6,6 +6,8 @@ import android.os.Environment;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
@@ -130,5 +132,27 @@ public class PictureActivity extends ToolbarActivity implements PicView{
     @Override
     public void FailtoFail() {
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_pic,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.action_save:
+                picPresenter.savePic(PictureActivity.this,ImageUrl,ImageData);
+                return true;
+            case R.id.action_share:
+                Toasts.showShort("分享功能构建中");
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

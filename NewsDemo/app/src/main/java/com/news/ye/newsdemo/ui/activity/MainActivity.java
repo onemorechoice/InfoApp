@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i("onStart","onStart123");
+        Log.i("onStart","onStart456");
     }
 
     @Override
