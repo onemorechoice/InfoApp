@@ -65,6 +65,7 @@ public class DetailActivity extends BaseActivity implements DetailView{
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
+        dynamicAddView(mCollapsinglayout,"contentScrimColor", R.color.colorPrimary);
         mCollapsinglayout.setTitle(newsBean.getTitle());
         Glide.with(this)
                 .load(newsBean.getImgsrc())

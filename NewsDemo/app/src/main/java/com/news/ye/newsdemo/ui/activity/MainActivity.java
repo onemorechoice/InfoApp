@@ -12,12 +12,14 @@ import android.view.MenuItem;
 import com.news.ye.newsdemo.R;
 import com.news.ye.newsdemo.presenter.Impl.MainPresentImpl;
 import com.news.ye.newsdemo.presenter.MainPresenter;
+import com.news.ye.newsdemo.ui.base.BaseActivity;
 import com.news.ye.newsdemo.ui.fragment.ImageFragment;
 import com.news.ye.newsdemo.ui.fragment.JianDanFragment;
 import com.news.ye.newsdemo.ui.fragment.NewsFragment;
+import com.news.ye.newsdemo.ui.fragment.ThemeFragment;
 import com.news.ye.newsdemo.ui.iView.MainView;
 
-public class MainActivity extends AppCompatActivity implements MainView{
+public class MainActivity extends BaseActivity implements MainView{
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -68,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements MainView{
     private void initView() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        dynamicAddView( mToolbar, "background", R.color.colorPrimary);
+
         //绑定抽屉的标准写法
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,mToolbar, R.string.drawer_open, R.string.drawer_close);
@@ -77,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         setupDrawerContent(mNavigationView);
         mNavigationView.setItemBackground(getResources().getDrawable(R.drawable.navigation_selector));
-
+        dynamicAddView(mNavigationView.getHeaderView(0), "background",R.color.colorPrimary);
         switch2News();
 
     }
@@ -112,6 +116,12 @@ public class MainActivity extends AppCompatActivity implements MainView{
     public void switch2JianDan() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,new JianDanFragment()).commit();
         mToolbar.setTitle("煎蛋");
+    }
+
+    @Override
+    public void switch2Theme() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,new ThemeFragment()).commit();
+        mToolbar.setTitle("主题换肤");
     }
 
 }

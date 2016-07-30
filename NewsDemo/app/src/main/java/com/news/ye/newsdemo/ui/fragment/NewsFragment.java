@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.news.ye.newsdemo.R;
 import com.news.ye.newsdemo.ui.adapter.MyPagerAdapter;
+import com.news.ye.newsdemo.ui.base.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +21,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewsFragment extends Fragment {
+public class NewsFragment extends BaseFragment {
     public static final int NEWS_TYPE_TOP = 0;
     public static final int NEWS_TYPE_NBA = 1;
     public static final int NEWS_TYPE_CARS = 2;
@@ -52,6 +53,8 @@ public class NewsFragment extends Fragment {
     }
 
     private void initView() {
+        dynamicAddView( mTablayout, "background", R.color.colorPrimary);
+        dynamicAddView(mTablayout, "tabLayoutIndicator", R.color.colorAccent);
         setupViewPager(mViewPager);
         mTablayout.addTab(mTablayout.newTab().setText("头条"));
         mTablayout.addTab(mTablayout.newTab().setText("NBA"));

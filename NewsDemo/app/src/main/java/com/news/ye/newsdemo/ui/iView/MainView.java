@@ -7,4 +7,5 @@ public interface MainView {
     void switch2Images();
     void switch2News();
     void switch2JianDan();
+    void switch2Theme();
 }

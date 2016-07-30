@@ -25,6 +25,9 @@ public class MainPresentImpl implements MainPresenter{
           case R.id.navigation_item_jiandan:
               mainView.switch2JianDan();
               break;
+          case R.id.navigation_theme:
+              mainView.switch2Theme();
+              break;
       }
     }
 }

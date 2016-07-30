@@ -18,6 +18,7 @@ import com.news.ye.newsdemo.presenter.Impl.JianDanPresenterImpl;
 import com.news.ye.newsdemo.presenter.JianDanPresenter;
 import com.news.ye.newsdemo.ui.activity.WebActivity;
 import com.news.ye.newsdemo.ui.adapter.JianDanAdapter;
+import com.news.ye.newsdemo.ui.base.BaseFragment;
 import com.news.ye.newsdemo.ui.iView.JianDanView;
 import com.news.ye.newsdemo.util.Toasts;
 
@@ -30,7 +31,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class JianDanFragment extends Fragment implements JianDanView{
+public class JianDanFragment extends BaseFragment implements JianDanView{
 
 
     private Unbinder umBinder;

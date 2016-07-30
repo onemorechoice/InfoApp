@@ -21,7 +21,7 @@ import com.news.ye.newsdemo.presenter.Impl.NewsPresentImpl;
 import com.news.ye.newsdemo.presenter.NewsPresenter;
 import com.news.ye.newsdemo.ui.activity.DetailActivity;
 import com.news.ye.newsdemo.ui.adapter.NewsAdapter;
-import com.news.ye.newsdemo.ui.base.BaseFragment;
+import com.news.ye.newsdemo.ui.base.LazyFragment;
 import com.news.ye.newsdemo.ui.iView.NewsView;
 import com.news.ye.newsdemo.util.Const;
 import com.news.ye.newsdemo.util.Toasts;
@@ -36,7 +36,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewsListFragment extends BaseFragment implements NewsView{
+public class NewsListFragment extends LazyFragment implements NewsView{
     private Unbinder umBinder;
     private int mType = NewsFragment.NEWS_TYPE_TOP;
     private int pageIndex = 0;

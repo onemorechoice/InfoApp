@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':skin_green', ':skin_orange'
 include ':xrecyclerview'

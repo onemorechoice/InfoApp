@@ -20,6 +20,7 @@ import com.news.ye.newsdemo.presenter.Impl.MeiziPresentImpl;
 import com.news.ye.newsdemo.presenter.MeiziPresenter;
 import com.news.ye.newsdemo.ui.activity.PictureActivity;
 import com.news.ye.newsdemo.ui.adapter.MeiziAdapter;
+import com.news.ye.newsdemo.ui.base.BaseFragment;
 import com.news.ye.newsdemo.ui.iView.MeiziView;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ import space.sye.z.library.manager.RecyclerViewManager;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ImageFragment extends Fragment implements MeiziView {
+public class ImageFragment extends BaseFragment implements MeiziView {
 
 //    ,SwipeRefreshLayout.OnRefreshListener
     private Unbinder umBinder;

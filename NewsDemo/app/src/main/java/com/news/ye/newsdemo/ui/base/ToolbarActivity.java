@@ -53,6 +53,7 @@ public abstract class ToolbarActivity extends BaseActivity {
             throw new IllegalStateException(
                     "The subclass of ToolbarActivity must contain a toolbar.");
         }
+        dynamicAddView( mToolbar, "background", R.color.colorPrimary);
         mToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
