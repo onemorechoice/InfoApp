@@ -3,22 +3,22 @@
 <group android:checkableBehavior="single">
     <item
         android:id="@+id/navigation_item_news"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/news_selector"
         android:checked="true"
         android:title="新闻"
         />
     <item
         android:id="@+id/navigation_item_jiandan"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/jiandan_selector"
         android:title="每日一鲜"
         />
     <item
         android:id="@+id/navigation_item_meizi"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/meizi_selector"
         android:title="福利"
         />
     <item android:id="@+id/navigation_theme"
-          android:icon="@mipmap/ic_launcher"
+          android:icon="@drawable/theme_selector"
           android:title="主题换肤"/>
 </group>
 </menu>
