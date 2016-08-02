@@ -21,6 +21,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:paddingTop="5dp"
     />
-
+    <include layout="@layout/time_out_layout"/>
 
 </RelativeLayout>

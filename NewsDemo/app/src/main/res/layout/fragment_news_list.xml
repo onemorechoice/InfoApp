@@ -11,6 +11,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 
+    <include layout="@layout/time_out_layout"/>
+
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -39,6 +40,8 @@ public class JianDanFragment extends BaseFragment implements JianDanView{
     private int page=1;
     @BindView(R.id.xlist)
     XRecyclerView xList;
+    @BindView(R.id.time_out)
+    RelativeLayout time_out;
     private ArrayList<JianDan.PostsEntity> listData;
     private JianDanAdapter adapter;
 
@@ -52,7 +55,6 @@ public class JianDanFragment extends BaseFragment implements JianDanView{
         umBinder= ButterKnife.bind(this,view);
         jianDanPresenter=new JianDanPresenterImpl(this);
         initData();
-//        jianDanPresenter.getJianDanList(page);
         return view;
     }
 
@@ -66,9 +68,7 @@ public class JianDanFragment extends BaseFragment implements JianDanView{
         xList.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                page=1;
-                jianDanPresenter.getJianDanList(page);
-                xList.setLoadingMoreEnabled(true);
+                onRefreshList();
             }
 
             @Override
@@ -82,6 +82,12 @@ public class JianDanFragment extends BaseFragment implements JianDanView{
         adapter.setOnItemClickListener(mOnItemClickListener);
         xList.setAdapter(adapter);
         xList.setRefreshing(true);
+        time_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onRefreshList();
+            }
+        });
     }
     JianDanAdapter.OnItemClickListener mOnItemClickListener=new JianDanAdapter.OnItemClickListener() {
         @Override
@@ -103,6 +109,8 @@ public class JianDanFragment extends BaseFragment implements JianDanView{
 
     @Override
     public void getSuccess(JianDan jianDan) {
+        xList.setVisibility(View.VISIBLE);
+        time_out.setVisibility(View.GONE);
         if (page==1){
             if (listData!=null){
                 listData.clear();
@@ -116,10 +124,20 @@ public class JianDanFragment extends BaseFragment implements JianDanView{
     @Override
     public void getFail() {
         Toasts.showShort("服务器出错了");
+        xList.setVisibility(View.GONE);
+        time_out.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void netWorkDown(String error) {
+        xList.setVisibility(View.GONE);
+        time_out.setVisibility(View.VISIBLE);
         Toasts.showShort(error);
+    }
+
+    private void onRefreshList(){
+        page=1;
+        jianDanPresenter.getJianDanList(page);
+        xList.setLoadingMoreEnabled(true);
     }
 }

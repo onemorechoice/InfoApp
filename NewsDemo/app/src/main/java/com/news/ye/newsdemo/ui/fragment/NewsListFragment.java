@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -46,6 +48,8 @@ public class NewsListFragment extends LazyFragment implements NewsView{
     private NewsAdapter adapter;
     @BindView(R.id.xlist)
     XRecyclerView xList;
+    @BindView(R.id.time_out)
+    RelativeLayout time_out;
 
 
     public static NewsListFragment newInstance(int type){
@@ -84,10 +88,7 @@ public class NewsListFragment extends LazyFragment implements NewsView{
         xList.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                pageIndex=0;
-                Log.i("type",String.valueOf(mType));
-                newsPresenter.getNewsList(mType,pageIndex);
-                xList.setLoadingMoreEnabled(true);
+                onRefreshList();
             }
 
             @Override
@@ -101,6 +102,12 @@ public class NewsListFragment extends LazyFragment implements NewsView{
         adapter.setOnItemClickListener(mOnItemClickListener);
         xList.setAdapter(adapter);
         xList.setRefreshing(true);
+        time_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onRefreshList();
+            }
+        });
     }
     private NewsAdapter.OnItemClickListener mOnItemClickListener=new NewsAdapter.OnItemClickListener() {
         @Override
@@ -130,6 +137,8 @@ public class NewsListFragment extends LazyFragment implements NewsView{
 
     @Override
     public void Success(List<NewsBean> list) {
+        xList.setVisibility(View.VISIBLE);
+        time_out.setVisibility(View.GONE);
         if (pageIndex==0){
             if (listData!=null){
                 listData.clear();
@@ -151,10 +160,19 @@ public class NewsListFragment extends LazyFragment implements NewsView{
         }
         if (error.equals("HTTP 403 Forbidden")){
             Toasts.showShort("没有更多信息可以加载可以试试刷新看看~~~");
-        }else{
+        }else if (error.contains("after")){
+            xList.setVisibility(View.GONE);
+            time_out.setVisibility(View.VISIBLE);
+        }
+        else{
             Toasts.showShort(error);
         }
 
+    }
+    private void onRefreshList(){
+        pageIndex=0;
+        newsPresenter.getNewsList(mType,pageIndex);
+        xList.setLoadingMoreEnabled(true);
     }
 
 

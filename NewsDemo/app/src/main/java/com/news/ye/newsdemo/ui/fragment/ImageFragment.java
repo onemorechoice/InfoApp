@@ -12,6 +12,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.news.ye.newsdemo.R;
@@ -55,6 +56,8 @@ public class ImageFragment extends BaseFragment implements MeiziView {
 
     @BindView(R.id.recycler_view)
     RefreshRecyclerView recyclerView;
+    @BindView(R.id.time_out)
+    RelativeLayout time_out;
 //    @BindView(R.id.swipeToLoadLayout)
 //    SwipeRefreshLayout swipeRefreshLayout;
 
@@ -95,8 +98,6 @@ public class ImageFragment extends BaseFragment implements MeiziView {
                                 @Override
                                 public void onPullDown() {
                                     currentPage=1;
-                                    list.clear();
-                                    adapter.notifyDataSetChanged();
                                     mMeiziPresenter.getMeizi(currentPage);
                                 }
 
@@ -117,6 +118,15 @@ public class ImageFragment extends BaseFragment implements MeiziView {
                 .into(recyclerView, getActivity());
         adapter.setOnItemClickListener(onItemClickListener);
         mMeiziPresenter.getMeizi(1);
+
+
+        time_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentPage=1;
+                mMeiziPresenter.getMeizi(currentPage);
+            }
+        });
     }
     private MeiziAdapter.OnItemClickListener onItemClickListener=new MeiziAdapter.OnItemClickListener() {
         @Override
@@ -137,45 +147,45 @@ public class ImageFragment extends BaseFragment implements MeiziView {
 
         }
     };
-    private void setListener() {
-       recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-           private boolean toLast = false;
-           @Override
-           public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-               super.onScrollStateChanged(recyclerView, newState);
-               int visibleItemCount = staggeredGridLayoutManager.getChildCount();
-               int totalItemCount = staggeredGridLayoutManager.getItemCount();
-               if (visibleItemCount > 0&&newState==RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem  >= totalItemCount - 1){
-                       isMoreLoading=true;
-                       currentPage++;
-                       mMeiziPresenter.getMeizi(currentPage);
-                       isMoreLoading=false;
-               }
-           }
-
-           @Override
-           public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-               super.onScrolled(recyclerView, dx, dy);
-               if (lastPositions == null) {
-                   lastPositions = new int[staggeredGridLayoutManager.getSpanCount()];
-               }
-               staggeredGridLayoutManager.findLastVisibleItemPositions(lastPositions);
-               lastVisibleItem = findMax(lastPositions);
-
-           }
-       });
-    }
-
-    //找到数组中的最大值
-    private int findMax(int[] lastPositions) {
-        int max = lastPositions[0];
-        for (int value : lastPositions) {
-            if (value > max) {
-                max = value;
-            }
-        }
-        return max;
-    }
+//    private void setListener() {
+//       recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//           private boolean toLast = false;
+//           @Override
+//           public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//               super.onScrollStateChanged(recyclerView, newState);
+//               int visibleItemCount = staggeredGridLayoutManager.getChildCount();
+//               int totalItemCount = staggeredGridLayoutManager.getItemCount();
+//               if (visibleItemCount > 0&&newState==RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem  >= totalItemCount - 1){
+//                       isMoreLoading=true;
+//                       currentPage++;
+//                       mMeiziPresenter.getMeizi(currentPage);
+//                       isMoreLoading=false;
+//               }
+//           }
+//
+//           @Override
+//           public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//               super.onScrolled(recyclerView, dx, dy);
+//               if (lastPositions == null) {
+//                   lastPositions = new int[staggeredGridLayoutManager.getSpanCount()];
+//               }
+//               staggeredGridLayoutManager.findLastVisibleItemPositions(lastPositions);
+//               lastVisibleItem = findMax(lastPositions);
+//
+//           }
+//       });
+//    }
+//
+//    //找到数组中的最大值
+//    private int findMax(int[] lastPositions) {
+//        int max = lastPositions[0];
+//        for (int value : lastPositions) {
+//            if (value > max) {
+//                max = value;
+//            }
+//        }
+//        return max;
+//    }
 
 
     @Override
@@ -200,6 +210,13 @@ public class ImageFragment extends BaseFragment implements MeiziView {
 //        if (DataSize < 10) {
 //            adapter.setGoneFooter();
 //        }
+        recyclerView.setVisibility(View.VISIBLE);
+        time_out.setVisibility(View.GONE);
+        if ( currentPage==1){
+            if (list!=null){
+                list.clear();
+            }
+        }
        list.addAll(bean);
        recyclerView.onRefreshCompleted();
        adapter.notifyDataSetChanged();
@@ -207,11 +224,15 @@ public class ImageFragment extends BaseFragment implements MeiziView {
 
     @Override
     public void Fail() {
+        recyclerView.setVisibility(View.GONE);
+        time_out.setVisibility(View.VISIBLE);
         Toast.makeText(getActivity(),"发生未知错误",Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void NetWorkDown(String error) {
+        recyclerView.setVisibility(View.GONE);
+        time_out.setVisibility(View.VISIBLE);
         Toast.makeText(getActivity(),error,Toast.LENGTH_SHORT).show();
     }
 
