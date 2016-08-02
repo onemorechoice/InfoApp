@@ -83,11 +83,13 @@ public class WebActivity extends ToolbarActivity {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
-            progressBar.setProgress(newProgress);
-            if (newProgress == 100) {
-                progressBar.setVisibility(View.GONE);
-            } else {
-                progressBar.setVisibility(View.VISIBLE);
+            if (progressBar!=null) {
+                progressBar.setProgress(newProgress);
+                if (newProgress == 100) {
+                    progressBar.setVisibility(View.GONE);
+                } else {
+                    progressBar.setVisibility(View.VISIBLE);
+                }
             }
         }
     }

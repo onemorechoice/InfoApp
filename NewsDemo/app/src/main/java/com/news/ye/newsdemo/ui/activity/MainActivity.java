@@ -20,7 +20,9 @@ import com.news.ye.newsdemo.ui.fragment.NewsFragment;
 import com.news.ye.newsdemo.ui.fragment.ThemeFragment;
 import com.news.ye.newsdemo.ui.iView.MainView;
 
-public class MainActivity extends BaseActivity implements MainView{
+import solid.ren.skinlibrary.base.SkinBaseActivity;
+
+public class MainActivity extends SkinBaseActivity implements MainView{
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;

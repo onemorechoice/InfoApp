@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:background="@android:color/white"
     tools:context=".ui.activity.DetailActivity">
     
     <android.support.design.widget.AppBarLayout
@@ -20,17 +22,18 @@
             app:contentScrim="@color/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
+            android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             >
        <ImageView
            android:id="@+id/detail_pic"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:fitsSystemWindows="true"
            app:layout_collapseMode="parallax"
            android:transitionName="@string/transition_img"
            android:scaleType="centerCrop"
            app:layout_collapseParallaxMultiplier="0.7"
+           android:fitsSystemWindows="true"
            />
 
        <android.support.v7.widget.Toolbar
@@ -54,6 +57,7 @@
             android:id="@+id/web_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             >
             <ProgressBar
                 android:id="@+id/progress"
