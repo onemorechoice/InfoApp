@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.news.ye.newsdemo.R;
 import com.news.ye.newsdemo.presenter.Impl.MainPresentImpl;
 import com.news.ye.newsdemo.presenter.MainPresenter;
-import com.news.ye.newsdemo.ui.base.BaseActivity;
+import com.news.ye.newsdemo.ui.fragment.AboutFragment;
 import com.news.ye.newsdemo.ui.fragment.ImageFragment;
 import com.news.ye.newsdemo.ui.fragment.JianDanFragment;
 import com.news.ye.newsdemo.ui.fragment.NewsFragment;
@@ -126,6 +126,12 @@ public class MainActivity extends SkinBaseActivity implements MainView{
     public void switch2Theme() {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,new ThemeFragment()).commit();
         mToolbar.setTitle("主题换肤");
+    }
+
+    @Override
+    public void switch2About() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content,new AboutFragment()).commit();
+        mToolbar.setTitle("关于");
     }
 
 

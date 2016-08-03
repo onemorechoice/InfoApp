@@ -8,4 +8,5 @@ public interface MainView {
     void switch2News();
     void switch2JianDan();
     void switch2Theme();
+    void switch2About();
 }

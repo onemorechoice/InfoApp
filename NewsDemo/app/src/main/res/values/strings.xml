@@ -5,4 +5,11 @@
     <string name="transition_img">transition_img</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="about">本App是为了将MVP+RxJava+Retrofit结合练习，里面分别有新闻，煎蛋，妹子图片等资讯。App里借用了比较多的api，妹子的api是来自gank.io的，新闻的api是来自我参考的一个app的，这里要感谢@daimajia @drakket @lauren，如有什么问题或者不足之处麻烦联系我一下。爱生活，爱dota，更爱代码。</string>
+    
+    <string name="email">邮箱：496008162@qq.com</string>
+    <string name="app_git_url">我的github：</string>
+    <string name="app_url">https://github.com/onemorechoice/InfoApp</string>
+    
 </resources>

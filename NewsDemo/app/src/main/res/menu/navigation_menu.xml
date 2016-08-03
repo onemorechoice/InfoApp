@@ -17,8 +17,17 @@
         android:icon="@drawable/meizi_selector"
         android:title="福利"
         />
-    <item android:id="@+id/navigation_theme"
-          android:icon="@drawable/theme_selector"
-          android:title="主题换肤"/>
+    <item
+        android:id="@+id/navigation_about"
+        android:icon="@drawable/about_icon"
+        android:title="关于"/>
 </group>
+
+<group android:checkableBehavior="single"
+       android:id="@+id/group_manage">
+    <item android:id="@+id/navigation_theme"
+        android:icon="@drawable/theme_selector"
+        android:title="主题换肤"/>
+</group>
+
 </menu>
