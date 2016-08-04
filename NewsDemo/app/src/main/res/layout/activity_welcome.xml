@@ -6,8 +6,16 @@
     android:layout_height="match_parent"
     android:background="@color/welcome">
 
+    <ImageView
+        android:id="@+id/banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/about"
+        android:visibility="gone"/>
+
+
     <com.hanks.htextview.HTextView
-        android:id="@+id/name"
+        android:id="@+id/AppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
